@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+		<!-- 把dao层的xml一并加载 -->
+	<import resource="classpath:applicationContext-dao.xml"/>
+		
+		
+	<!-- 配置dubbo的应用名称 -->
+	<dubbo:application name="playerInfo-service" />
+	<!-- 配置注册中心地址 -->
+	<dubbo:registry protocol="zookeeper" address="zookeeper://192.168.0.104:2181"  />
+	
+	
+	<!-- 配置dubbo和spring扫描包 -->
+	<dubbo:annotation package="com.nba.service.impl" />
+	<context:component-scan base-package="com.nba.service.impl"></context:component-scan>
+	
+
+</beans>
